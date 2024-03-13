@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>PLAYLABS</title>
+
+    <!-- 페이지 메타데이터 -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- 페이지 파비콘 -->
+    <link rel="shortcut icon" href="./res/image/favicon.ico" type="image/x-icon">
+
+    <!-- 페이지 스타일 시트 -->
+    <link rel="stylesheet" href="./styles/main.css">
+
+    <!-- 라이브러리 -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
+    <script src="./scripts/AudioEngine.js"></script>
+    <script src="./scripts/ShareEngine.js"></script>
+
+    <!-- 페이지 스크립트 -->
+    <script src="./scripts/index.js"></script>
+    <script src="./scripts/root.js"></script>
+</head>
+
+<body>
+    <video id="screen" autoplay></video>
+    <audio id="sound"></audio>
+
+    <div class="pending">
+        <div class="content-area">
+            <div class="title-area">
+                <div class="title">PLAYLABS</div>
+                <div class="subtitle">MAKER SPACE</div>
+            </div>
+            <div class="button-area">
+                <div class="button" onclick="share_btn()" id="btn1">
+                    <div class="inner-content b-color">SHARE</div>
+                </div>
+                <div class="button" id="btn2" onclick="watch_btn()">
+                    <div class="inner-content w-color">WATCH</div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
