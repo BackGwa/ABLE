@@ -12,15 +12,15 @@
     <link rel="shortcut icon" href="./res/image/favicon.ico" type="image/x-icon">
 
     <!-- 페이지 스타일 시트 -->
-    <link rel="stylesheet" href="./styles/main.css">
+    <link rel="stylesheet" href="./styles/root.css">
+    <link rel="stylesheet" href="./styles/share.css">
 
     <!-- 라이브러리 -->
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/paho-mqtt/1.0.1/mqttws31.js"></script>
     <script src="./scripts/AudioEngine.js"></script>
     <script src="./scripts/ShareEngine.js"></script>
 
     <!-- 페이지 스크립트 -->
-    <script src="./scripts/index.js"></script>
+    <script src="./scripts/share.js"></script>
     <script src="./scripts/root.js"></script>
 </head>
 
@@ -35,7 +35,7 @@
                 <div class="subtitle">MAKER SPACE</div>
             </div>
             <div class="button-area">
-                <div class="button" onclick="share_btn()" id="btn1">
+                <div class="button" id="btn1" onclick="share_btn()">
                     <div class="inner-content b-color">SHARE</div>
                 </div>
                 <div class="button" id="btn2" onclick="watch_btn()">

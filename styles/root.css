@@ -1,0 +1,16 @@
+@import url('https://fonts.cdnfonts.com/css/mona-sans');
+
+* {
+    user-select: none;
+    -webkit-user-drag: none;
+    -webkit-user-select: none;
+    -webkit-user-modify: none;
+    -moz-user-select: none;
+}
+
+html,
+body {
+    margin: 0;
+    overflow: hidden;
+    font-family: 'Mona-Sans';
+}
