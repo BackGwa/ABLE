@@ -3,10 +3,11 @@ const audio = new AudioEngine();
 const share = new ShareEngine();
 
 // 웹 소켓 설정
-const server = "ws://192.168.0.25:3000"
+const server = "ws://127.0.0.1:3000"
 const ws = new WebSocket(server);
 
 // 상태 변수
+let is_share;
 let share_stat = false;
 let watch_stat = false;
 
@@ -20,33 +21,35 @@ function init() {
     subtitle = document.querySelector(".subtitle");
     btn1 = document.querySelector("#btn1");
     btn2 = document.querySelector("#btn2");
+    user_name = prompt("NAME");
 }
 
 // SHARE 버튼
 async function share_btn() {  
     // 공유 중이 아니면, 공유 시작
     if (!share_stat) {
-        try         { share_stat = await share.start(video); }
-        catch (err) { error(err); }
-    }
-
-    // 공유 중이라면, 공유 중지
-    else {
+        try         {
+            share_stat = await share.start(video);
+            audio.play("./res/sound/start.mp3");
+        }
+        catch (err) {
+            error(err);
+        }
+    } else {
         share_stat = !share.stop();
+        audio.play("./res/sound/stop.mp3");
     }
 
     // 현재 공유 상태에 따른, 엘리먼트 업데이트
     if (share_stat) {
-        audio.play("./res/sound/start.mp3");
         start_share();
     } else {
-        audio.play("./res/sound/stop.mp3");
         stop_share();
     }
 
     // 현재 공유 상태에 따른, 공유 상태 업데이트
     if (share_stat) {
-        is_share = setInterval(send_data, 24);
+        is_share = setInterval(send_data, 1000 / 24);
     } else {
         clearInterval(is_share);
     }
@@ -113,7 +116,10 @@ function stop_watch() {
 // 스크린 데이터 전송
 function send_data() {
     const raw_data = share.data();
-    ws.send(raw_data);
+    ws.send(JSON.stringify({
+        name: user_name,
+        data: raw_data
+    }));
 }
 
 // 제목 내용 변경
