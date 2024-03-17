@@ -1,17 +1,38 @@
-const server = "ws://127.0.0.1:3000"
+const server = "ws://127.0.0.1:144"
 const ws = new WebSocket(server);
 
-function init() {
-    connection = document.querySelector("div");
-    names = document.querySelector("p");
-    source = document.querySelector("img");
+let before_connection = 0;
 
+function init() {
+    container = document.querySelector(".container");
     ws.onmessage = async function (e) {
-        if (e !== null && e !== undefined) {
-            data = JSON.parse(e.data);
-            connection.innerHTML = data.connection;
-            names.innerHTML = data.name;
-            source.src = data.data;
+        if (e.data) {
+            const data = JSON.parse(e.data);
+            user_update(data.connection);
+            screen_update(data.index, data.nickname, data.screen);
         }
 	}
+}
+
+function user_update(connection) {
+    if (connection == before_connection)
+        return
+
+    if (connection == 0) {
+        container.innerHTML = "";
+        return
+    }
+
+    before_connection = connection;
+    container.innerHTML = "";
+
+    for (let i = 0; i < connection; i++) {
+        container.innerHTML += `<img width="640px" height="480px" id="client_${i}">`;
+    }
+}
+
+function screen_update(id, name, data) {
+    user = document.querySelector(`#client_${id}`);
+    user.src = data;
+    user.alt = name;
 }
