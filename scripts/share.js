@@ -3,7 +3,7 @@ const audio = new AudioEngine();
 const share = new ShareEngine();
 
 // 상태 변수
-let is_share;
+let ws;
 let share_stat = false;
 let watch_stat = false;
 
@@ -38,9 +38,9 @@ async function share_btn() {
 
     // 현재 공유 상태에 따른, 공유 상태 업데이트
     if (share_stat) {
-        ws = new WebSocket("ws://127.0.0.1:72");
+        ws = new WebSocket("ws://192.168.0.25:72");
         is_share = setInterval(() => {
-            send_data(ws);
+            send_data();
         }, 1000 / 30);
     } else {
         ws.close();
@@ -107,7 +107,7 @@ function stop_watch() {
 }
 
 // 스크린 데이터 전송
-function send_data(ws) {
+function send_data() {
     const screen = share.data();
     ws.send(JSON.stringify({
         nickname: nickname,
