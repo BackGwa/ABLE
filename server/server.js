@@ -19,14 +19,18 @@ function reg_event(wss, clients) {
     wss.on("connection", (client) => {              // 클라이언트 입장 시,
         clients.add(client);                        // 클라이언트 세트에 추가
         if (wss == sharing_wss)                     // 공유 클라이언트라면,
-            recv_data(wss, clients, client)         // 데이터 수신 후 전송
+            recv_data(clients, client)              // 데이터 수신 후 전송
+        
+        client.on("close", () => {                  // 클라이언트 퇴장 시,
+            clients.delete(client);                 // 클라이언트 세트에서 제거
+            if (sharing_clients.size < 1)           // 클라이언트 세트에 클라이언트가 없다면,
+            send_data(                              // 클라이언트 없음 데이터 전송
+                watching_clients,
+                { connect : 0 }
+            );
+        })
     });
-    
-    wss.on("close", (client) => {                   // 클라이언트 퇴장 시,
-        clients.delete(client);                     // 클라이언트 세트에서 제거
-        if (clients.size <= 1)                      // 클라이언트 세트에 클라이언트가 없다면,
-            send_data(clients, { connect : 0 });    // 클라이언트 없음 데이터 전송
-    });
+
 }
 
 // 데이터 수신 후 전송
