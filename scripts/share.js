@@ -39,7 +39,7 @@ async function share_btn() {
 
     // 현재 공유 상태에 따른, 공유 상태 업데이트
     if (share_stat) {
-        ws = new WebSocket(`ws://${server_address}:72`);
+        ws = new WebSocket(`ws://192.168.0.75:72`);
         is_share = setInterval(() => {
             send_data();
         }, 1000 / 30);

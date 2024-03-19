@@ -2,7 +2,7 @@
 const audio = new AudioEngine();
 
 // 시청 웹 소켓과 연결
-const server = `ws://${prompt("SERVER ADDRESS")}:144`
+const server = `ws://192.168.0.75:144`
 const ws = new WebSocket(server);
 
 // 이전 클라이언트 수
