@@ -17,7 +17,8 @@ function init() {
     subtitle = document.querySelector(".subtitle");
     btn1 = document.querySelector("#btn1");
     btn2 = document.querySelector("#btn2");
-    nickname = prompt("NICKNAME");
+    server_address = prompt("서버 주소를 입력하세요.");
+    nickname = prompt("이름을 입력하세요.");
 }
 
 // SHARE 버튼
@@ -38,7 +39,7 @@ async function share_btn() {
 
     // 현재 공유 상태에 따른, 공유 상태 업데이트
     if (share_stat) {
-        ws = new WebSocket("ws://127.0.0.1:72");
+        ws = new WebSocket(`ws://${server_address}:72`);
         is_share = setInterval(() => {
             send_data();
         }, 1000 / 30);
