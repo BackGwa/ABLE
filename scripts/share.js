@@ -17,7 +17,6 @@ function init() {
     subtitle = document.querySelector(".subtitle");
     btn1 = document.querySelector("#btn1");
     btn2 = document.querySelector("#btn2");
-    server_address = prompt("서버 주소를 입력하세요.");
     nickname = prompt("이름을 입력하세요.");
 }
 
